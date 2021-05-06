@@ -6,16 +6,23 @@ const formidable = require('formidable');
 const app = http.createServer(function (req, res) {
     let pathname = url.parse(req.url).pathname;
     let method = req.method;
-    
+
+    //允许跨域
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type,Content-Length, Authorization, Accept,X-Requested-With");
+    res.setHeader("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
+    res.setHeader("X-Powered-By", ' 3.2.1')
+
     //首页
-    if (pathname === '/') {
-        fs.readFile('./index.html', function (err, data) {
-            if (!err) {
-                res.write(data);
-                res.end();
-            }
-        })
-    }
+    
+    // if (pathname === '/') {
+    //     fs.readFile('./index.html', function (err, data) {
+    //         if (!err) {
+    //             res.write(data);
+    //             res.end();
+    //         }
+    //     })
+    // }
     //图片上传
     if (pathname === '/upload' && method.toLowerCase() === 'post') {
         //parse a file upload
@@ -46,4 +53,4 @@ const app = http.createServer(function (req, res) {
         return;
     }
 });
-app.listen(8080)
+app.listen(5000)
